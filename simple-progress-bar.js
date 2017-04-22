@@ -6,8 +6,8 @@
 function convertToNumberIfPossible(value) {
   var ret = value;
 
-  if (!Number.isNaN(parseInt(value, 2))) {
-    ret = parseInt(value, 2);
+  if (!Number.isNaN(parseInt(value, 10))) {
+    ret = parseInt(value, 10);
   }
   return ret;
 }
@@ -93,7 +93,7 @@ class SimpleProgressBar extends HTMLElement {
   }
 
   get max() {
-    return this._max;
+    return convertToNumberIfPossible(this._max);
   }
 
   set max(value) {
@@ -102,7 +102,7 @@ class SimpleProgressBar extends HTMLElement {
   }
 
   get current() {
-    return this._current;
+    return convertToNumberIfPossible(this._current);
   }
 
   set current(value) {
@@ -113,7 +113,7 @@ class SimpleProgressBar extends HTMLElement {
     if (this._current === 0) {
       return 0;
     }
-    return Math.min(100, (parseInt(this._current, 2) * 100) / parseInt(this._max, 2));
+    return Math.min(100, (this.current * 100) / this.max);
   }
 
   updateRendering() {
@@ -182,12 +182,12 @@ class SimpleProgressBar extends HTMLElement {
   }
 
   increaseLimit() {
-    this.max = parseInt(this.max, 2) + 1;
+    this.max = parseInt(this.max, 10) + 1;
   }
 
   decreaseLimit() {
     if (this.max > 0) {
-      this.max = parseInt(this.max, 2) - 1;
+      this.max = parseInt(this.max, 10) - 1;
     }
   }
 
