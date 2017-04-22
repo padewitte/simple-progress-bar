@@ -67,7 +67,7 @@ class SimpleProgressBar extends HTMLElement {
   // If so, call our setter
   attributeChangedCallback(name, oldVal, newVal) {
     console.log('Attribute change callback', name, newVal, 'was', oldVal);
-    if (this['_' + camelCase(name)] !== convertToNumberIfPossible(newVal)) {
+    if (convertToNumberIfPossible(oldVal) !== convertToNumberIfPossible(newVal)) {
       this['_' + camelCase(name)] = convertToNumberIfPossible(newVal);
       this.updateRendering();
       this.dispatchEvent(new CustomEvent(name + "Change", { detail: { value: newVal } }));

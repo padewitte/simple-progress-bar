@@ -11,6 +11,8 @@
 
 <body>
   <div class="container">
+    <p id="maxValue">Max : 5</p>
+    <p id="currentValue">Current : 4</p>
     <div>Click on progress bar to increase the limit</div>
     <simple-progress-bar max="5" current="4"></simple-progress-bar>
     <button id="reset">reset</button>
@@ -29,6 +31,14 @@
 
     customProgressBar.addEventListener('under-limit', (evt) => {
       bodyElement.style.backgroundColor = 'white';
+    });
+
+    customProgressBar.addEventListener('maxChange', (evt) => {
+      document.querySelector('#maxValue').innerText = 'Max : ' + event.detail.value;
+    });
+
+    customProgressBar.addEventListener('currentChange', (evt) => {
+      document.querySelector('#currentValue').innerText = 'Current : ' + event.detail.value;
     });
 
     document.querySelector('#reset').addEventListener('click', () => {
