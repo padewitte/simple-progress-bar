@@ -1,0 +1,16 @@
+body {
+  transition: background 3s ease-in-out;
+}
+
+.container {
+  width: 50%;
+  min-width: 300px;
+  padding: 20% 25%;
+  text-align: center;
+}
+
+button {
+  min-width: 25px;
+  margin: 10px;
+  padding: 5px;
+}
