@@ -4,15 +4,16 @@
  */
 
 function convertToNumberIfPossible(value) {
-  if (Number.isNaN(parseInt(value))) {
-    return value;
-  } else {
-    return parseInt(value);
+  var ret = value;
+
+  if (!Number.isNaN(parseInt(value, 2))) {
+    ret = parseInt(value, 2);
   }
+  return ret;
 }
 
 function camelCase(input) {
-  return input.toLowerCase().replace(/-(.)/g, function(match, group1) {
+  return input.toLowerCase().replace(/-(.)/g, (match, group1) => {
     return group1.toUpperCase();
   });
 }
@@ -70,7 +71,7 @@ class SimpleProgressBar extends HTMLElement {
     if (convertToNumberIfPossible(oldVal) !== convertToNumberIfPossible(newVal)) {
       this['_' + camelCase(name)] = convertToNumberIfPossible(newVal);
       this.updateRendering();
-      this.dispatchEvent(new CustomEvent(name + "Change", { detail: { value: newVal } }));
+      this.dispatchEvent(new CustomEvent(name + 'Change', { detail: { value: newVal } }));
     }
   }
 
@@ -78,11 +79,13 @@ class SimpleProgressBar extends HTMLElement {
     console.log('Updating attribute', att, value);
     if (value !== undefined && value !== null) {
       const assignedValue = convertToNumberIfPossible(value);
+
       this['_' + camelCase(att)] = assignedValue;
       this.updateRendering();
       this.setAttribute(att, assignedValue);
     } else {
       const assignedValue = convertToNumberIfPossible(defaultValue);
+
       this['_' + camelCase(att)] = assignedValue;
       this.updateRendering();
       this.setAttribute(att, assignedValue);
@@ -110,16 +113,16 @@ class SimpleProgressBar extends HTMLElement {
     if (this._current === 0) {
       return 0;
     }
-    return Math.min(100, (parseInt(this._current) * 100) / parseInt(this._max));
+    return Math.min(100, (parseInt(this._current, 2) * 100) / parseInt(this._max, 2));
   }
 
   updateRendering() {
     console.log('Updating rendering');
     if (this.connected === true) {
       this.querySelector('#barStatus').style.width = this.getRatio() + '%';
-      this.querySelector('#legenda').innerText = this._current + '/' + this._max
+      this.querySelector('#legenda').innerText = this._current + '/' + this._max;
       if (this.getRatio() >= 100) {
-        this.dispatchEvent(new CustomEvent("limit-reach", {
+        this.dispatchEvent(new CustomEvent('limit-reach', {
           detail: {
             txt: 'Limit reach',
             current: this.current,
@@ -127,7 +130,7 @@ class SimpleProgressBar extends HTMLElement {
           }
         }));
       } else {
-        this.dispatchEvent(new CustomEvent("under-limit", {
+        this.dispatchEvent(new CustomEvent('under-limit', {
           detail: {
             txt: 'Under limit',
             current: this.current,
@@ -152,7 +155,6 @@ class SimpleProgressBar extends HTMLElement {
             align-items: center;
             z-index: 1;
         }
-
         #barStatus {
             position: absolute;
             width: 1px;
@@ -163,7 +165,6 @@ class SimpleProgressBar extends HTMLElement {
             transition: width 2s;
             z-index: 4;
         }
-        
         #legenda {
             color: #ffffff;
             padding: 5px;
@@ -174,7 +175,6 @@ class SimpleProgressBar extends HTMLElement {
         <div id="progressBar">
             <div id="legenda">${this._current}/${this._max}</div>
             <div id="barStatus"></div>
-            
       </div>`;
     window.setTimeout(() => {
       this.updateRendering();
@@ -182,19 +182,18 @@ class SimpleProgressBar extends HTMLElement {
   }
 
   increaseLimit() {
-    this.max = parseInt(this.max) + 1;
+    this.max = parseInt(this.max, 2) + 1;
   }
 
   decreaseLimit() {
     if (this.max > 0) {
-      this.max = parseInt(this.max) - 1;
+      this.max = parseInt(this.max, 2) - 1;
     }
   }
 
   increase() {
     this.current++;
   }
-
 
   decrease() {
     this.current--;
@@ -205,5 +204,4 @@ if (!window.customElements.get('simple-progress-bar')) {
   window.customElements.define('simple-progress-bar', SimpleProgressBar);
 }
 
-
-//export default SimpleProgressBar;
+export default SimpleProgressBar;
