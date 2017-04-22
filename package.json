@@ -1,0 +1,23 @@
+{
+  "name": "simple-progress-bar",
+  "version": "0.0.1",
+  "description": "A simple progress bar to demo the beauty of custom elements",
+  "main": "simple-progress-bar.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/padewitte/simple-progress-bar.git"
+  },
+  "keywords": [
+    "CustomElement",
+    "WebComponents"
+  ],
+  "author": "P.A. DEWITTE",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/padewitte/simple-progress-bar/issues"
+  },
+  "homepage": "https://github.com/padewitte/simple-progress-bar#readme"
+}
