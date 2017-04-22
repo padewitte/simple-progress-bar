@@ -12,8 +12,12 @@ This custom element demo all the beahviors expected from a custom element :
 - Change style of the CE : Change with of the bar
 - Call a method: Increase limit
 
-TODO
 
 ## Run
 No build, just launch a local server.
 `python -m SimpleHTTPServer`
+
+
+## TODO 
+- Describe what the custom element could do in the index.html
+- Improve the README

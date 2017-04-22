@@ -17,7 +17,7 @@ function camelCase(input) {
   });
 }
 
-class ProgressBarElement extends HTMLElement {
+class SimpleProgressBar extends HTMLElement {
 
   constructor(self) {
     console.log('Constructing a new progress bar');
@@ -67,8 +67,8 @@ class ProgressBarElement extends HTMLElement {
   // If so, call our setter
   attributeChangedCallback(name, oldVal, newVal) {
     console.log('Attribute change callback', name, newVal, 'was', oldVal);
-    if (this[name] !== newVal) {
-      this[name] = newVal;
+    if (this['_' + camelCase(name)] !== convertToNumberIfPossible(newVal)) {
+      this['_' + camelCase(name)] = convertToNumberIfPossible(newVal);
       this.updateRendering();
       this.dispatchEvent(new CustomEvent(name + "Change", { detail: { value: newVal } }));
     }
@@ -79,10 +79,12 @@ class ProgressBarElement extends HTMLElement {
     if (value !== undefined && value !== null) {
       const assignedValue = convertToNumberIfPossible(value);
       this['_' + camelCase(att)] = assignedValue;
+      this.updateRendering();
       this.setAttribute(att, assignedValue);
     } else {
       const assignedValue = convertToNumberIfPossible(defaultValue);
       this['_' + camelCase(att)] = assignedValue;
+      this.updateRendering();
       this.setAttribute(att, assignedValue);
     }
   }
@@ -177,7 +179,6 @@ class ProgressBarElement extends HTMLElement {
     window.setTimeout(() => {
       this.updateRendering();
     }, 10);
-    //<div id="barStatusLeft">/${this._current}</div>
   }
 
   increaseLimit() {
@@ -190,11 +191,19 @@ class ProgressBarElement extends HTMLElement {
     }
   }
 
+  increase() {
+    this.current++;
+  }
+
+
+  decrease() {
+    this.current--;
+  }
 }
 
-if (!window.customElements.get('custom-progress-bar')) {
-  window.customElements.define('custom-progress-bar', ProgressBarElement);
+if (!window.customElements.get('simple-progress-bar')) {
+  window.customElements.define('simple-progress-bar', SimpleProgressBar);
 }
 
 
-export default ProgressBarElement
+//export default SimpleProgressBar;

@@ -5,7 +5,7 @@
   <meta charset="UTF-8">
   <title>Simple progress bar</title>
   <script src="//cdnjs.cloudflare.com/ajax/libs/document-register-element/1.1.1/document-register-element.js"></script>
-  <script type="text/javascript" src="progress-bar.js"></script>
+  <script type="text/javascript" src="simple-progress-bar.js"></script>
   <style>
     body {
       transition: background 3s ease-in-out;
@@ -18,7 +18,8 @@
       text-align: center;
     }
     
-    #increase {
+    button {
+      min-width: 25px;
       margin: 10px;
       padding: 5px;
     }
@@ -27,19 +28,33 @@
 
 <body>
   <div class="container">
-    <custom-progress-bar max="5" current="4"></custom-progress-bar>
-    <button id="increase">Increase nb of element</div>
+    <div>Click on progress bar to increase the limit</div>
+    <simple-progress-bar max="5" current="4"></simple-progress-bar>
+    <button id="reset">reset</button>
+    <button id="decrease">-</button>
+    <button id="increase">+</button>
+
   </div>
   <script>
-    const customProgressBar = document.querySelector('custom-progress-bar');
+    const customProgressBar = document.querySelector('simple-progress-bar');
     const bodyElement = document.querySelector('body');
+
     customProgressBar.addEventListener('limit-reach', (evt) => {
       bodyElement.originalBackgroundColor = bodyElement.style.backgroundColor;
       bodyElement.style.backgroundColor = 'lightpink';
     });
+
     customProgressBar.addEventListener('under-limit', (evt) => {
       bodyElement.style.backgroundColor = 'white';
     });
+
+    document.querySelector('#reset').addEventListener('click', () => {
+      customProgressBar.setAttribute('current', 0);
+    })
+
+    document.querySelector('#decrease').addEventListener('click', () => {
+      customProgressBar.decrease();
+    })
 
     document.querySelector('#increase').addEventListener('click', () => {
       customProgressBar.current = parseInt(customProgressBar.current) + 1
