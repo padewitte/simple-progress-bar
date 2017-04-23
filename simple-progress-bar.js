@@ -90,7 +90,7 @@ class SimpleProgressBar extends HTMLElement {
   }
 
   get max() {
-    return this._max;
+    return convertToNumberIfPossible(this._max);
   }
 
   set max(value) {
@@ -99,7 +99,7 @@ class SimpleProgressBar extends HTMLElement {
   }
 
   get current() {
-    return this._current;
+    return convertToNumberIfPossible(this._current);
   }
 
   set current(value) {
