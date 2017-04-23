@@ -70,7 +70,7 @@ class SimpleProgressBar extends HTMLElement {
     if (convertToNumberIfPossible(oldVal) !== convertToNumberIfPossible(newVal)) {
       this['_' + camelCase(name)] = convertToNumberIfPossible(newVal);
       this.updateRendering();
-      this.dispatchEvent(new CustomEvent(name + "Change", { detail: { value: newVal } }));
+      this.dispatchEvent(new CustomEvent(name + "Change", { detail: { value: this['_' + camelCase(name)] } }));
     }
   }
 
