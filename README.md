@@ -25,7 +25,7 @@ No build, just launch a local server after cloning this repo.
 This custom element demo all the possibility of custom element API:
 
 - Attribute definition : max and current are the two attributes exposed by this components. 
-- Attribute modification : each time max and/or current attributes are modified, a custom event maxChange or currentChange is fired. Also take a look in the debugger to see dom modification. Both attributes and properties are sync like a well designed component always should ([understand the difference between an attribute and a property](https://stackoverflow.com/questions/6003819/properties-and-attributes-in-html) 
+- Attribute modification : each time max and/or current attributes are modified, a custom event maxChange or currentChange is fired. Also take a look in the debugger to see dom modification. Both attributes and properties are sync like a well designed component always should ([understand the difference between an attribute and a property](https://stackoverflow.com/questions/6003819/properties-and-attributes-in-html) )
 - Listen to events inside the component : Left click increment the max value. Any other click decrease it.
 - Fire custom events : When the limit is reached a `limit-reach` event is fired. If current is lower than max an `under-limit` event is send.
 - Method are exposed and allows interaction with the component :  `increaseLimit()`, `decreaseLimit()`, `increase()`, `decrease()`, `reset()`
