@@ -55,7 +55,7 @@ class SimpleProgressBar extends HTMLElement {
 
     disconnectedCallback() {
         // Called every time the element is removed from the DOM.
-        console.log('nothing currenlty done at deconnexion');
+        console.log('nothing currently done at disconnection');
     }
 
     adoptedCallback() {
@@ -70,7 +70,7 @@ class SimpleProgressBar extends HTMLElement {
         if (convertToNumberIfPossible(oldVal) !== convertToNumberIfPossible(newVal)) {
             this['_' + camelCase(name)] = convertToNumberIfPossible(newVal);
             this.updateRendering();
-            this.dispatchEvent(new CustomEvent(name + "Change", { detail: { value: this['_' + camelCase(name)] } }));
+            this.dispatchEvent(new CustomEvent(name + "-changed", { detail: { value: this['_' + camelCase(name)] } }));
         }
     }
 
@@ -139,7 +139,7 @@ class SimpleProgressBar extends HTMLElement {
     }
 
     render() {
-        console.log('Rendering the custome element');
+        console.log('Rendering the custom element');
         this.innerHTML = `
       <style>
         #progressBar {

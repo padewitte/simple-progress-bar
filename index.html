@@ -2,57 +2,57 @@
 <html lang="en">
 
 <head>
-  <meta charset="UTF-8">
-  <title>Simple progress bar</title>
-  <script src="//cdnjs.cloudflare.com/ajax/libs/document-register-element/1.1.1/document-register-element.js"></script>
-  <script type="text/javascript" src="simple-progress-bar.js"></script>
-  <link rel="stylesheet" type="text/css" href="index.css">
+    <meta charset="UTF-8">
+    <title>Simple progress bar</title>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/document-register-element/1.1.1/document-register-element.js"></script>
+    <script type="text/javascript" src="simple-progress-bar.js"></script>
+    <link rel="stylesheet" type="text/css" href="index.css">
 </head>
 
 <body>
-  <div class="container">
-    <p id="maxValue">Max : 5</p>
-    <p id="currentValue">Current : 4</p>
-    <div>Click on progress bar to increase the limit</div>
-    <simple-progress-bar max="5" current="4"></simple-progress-bar>
-    <button id="reset">reset</button>
-    <button id="decrease">-</button>
-    <button id="increase">+</button>
+    <div class="container">
+        <p id="maxValue">Max : 5</p>
+        <p id="currentValue">Current : 4</p>
+        <div>Click on progress bar to increase the limit</div>
+        <simple-progress-bar max="5" current="4"></simple-progress-bar>
+        <button id="reset">reset</button>
+        <button id="decrease">-</button>
+        <button id="increase">+</button>
 
-  </div>
-  <script>
-    const customProgressBar = document.querySelector('simple-progress-bar');
-    const bodyElement = document.querySelector('body');
+    </div>
+    <script>
+        const customProgressBar = document.querySelector('simple-progress-bar');
+        const bodyElement = document.querySelector('body');
 
-    customProgressBar.addEventListener('limit-reach', (evt) => {
-      bodyElement.originalBackgroundColor = bodyElement.style.backgroundColor;
-      bodyElement.style.backgroundColor = 'lightpink';
-    });
+        customProgressBar.addEventListener('limit-reach', (evt) => {
+            bodyElement.originalBackgroundColor = bodyElement.style.backgroundColor;
+            bodyElement.style.backgroundColor = 'lightpink';
+        });
 
-    customProgressBar.addEventListener('under-limit', (evt) => {
-      bodyElement.style.backgroundColor = 'white';
-    });
+        customProgressBar.addEventListener('under-limit', (evt) => {
+            bodyElement.style.backgroundColor = 'white';
+        });
 
-    customProgressBar.addEventListener('maxChange', (evt) => {
-      document.querySelector('#maxValue').innerText = 'Max : ' + event.detail.value;
-    });
+        customProgressBar.addEventListener('max-changed', (evt) => {
+            document.querySelector('#maxValue').innerText = 'Max : ' + event.detail.value;
+        });
 
-    customProgressBar.addEventListener('currentChange', (evt) => {
-      document.querySelector('#currentValue').innerText = 'Current : ' + event.detail.value;
-    });
+        customProgressBar.addEventListener('current-changed', (evt) => {
+            document.querySelector('#currentValue').innerText = 'Current : ' + event.detail.value;
+        });
 
-    document.querySelector('#reset').addEventListener('click', () => {
-      customProgressBar.setAttribute('current', 0);
-    })
+        document.querySelector('#reset').addEventListener('click', () => {
+            customProgressBar.setAttribute('current', 0);
+        })
 
-    document.querySelector('#decrease').addEventListener('click', () => {
-      customProgressBar.decrease();
-    })
+        document.querySelector('#decrease').addEventListener('click', () => {
+            customProgressBar.decrease();
+        })
 
-    document.querySelector('#increase').addEventListener('click', () => {
-      customProgressBar.current = parseInt(customProgressBar.current) + 1
-    })
-  </script>
+        document.querySelector('#increase').addEventListener('click', () => {
+            customProgressBar.current = parseInt(customProgressBar.current) + 1
+        })
+    </script>
 </body>
 
 </html>
